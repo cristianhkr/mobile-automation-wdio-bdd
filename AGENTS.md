@@ -120,6 +120,17 @@ with `mobile: clearApp` — it forces a slow React Native cold start
   `uiautomator2` driver (`npm run appium:install:uiautomator2`).
 - **Emulator cold boots**: after killing an emulator, restart it with
   `-no-snapshot` to avoid corrupted quick-boot snapshots.
+- **CI runners need the KVM udev rule**: `android-emulator-runner` fails with
+  "Software CPU emulation (-accel off) is not supported" unless `/dev/kvm` is
+  opened to the runner user first (see the workflow's
+  "Enable KVM hardware acceleration" step).
+- **React Native renders slowly on CI emulators**: software-GPU cloud
+  emulators can take 30-60s for the first screen render — screen-visibility
+  waits in `wdio.conf.ts` and `ProductsPage` are deliberately generous for
+  this reason. Never lower them to "speed up" the suite.
+- **Allure reports cannot be opened via `file://`**: `index.html` must be
+  served over HTTP — use `npm run allure:open` locally, or the GitHub Pages
+  deployment.
 
 ## OpenCode skills available in this repo
 
