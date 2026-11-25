@@ -25,6 +25,14 @@ export default class CartPage extends BasePage {
   // ============================================================
 
   /**
+   * Waits until the cart screen has fully rendered (checkout button visible).
+   * React Native screens render asynchronously — much slower on CI emulators.
+   */
+  async waitForCartScreen(timeout: number = 30000): Promise<void> {
+    await this.waitForElementVisible(this.checkoutButton, timeout);
+  }
+
+  /**
    * Gets the number of items currently in the cart.
    * Each cart row has exactly one "test-Amount" quantity badge,
    * making it a reliable 1:1 item counter.

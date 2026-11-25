@@ -26,6 +26,11 @@ Given("the user's cart is empty", async function () {
 
 Given('the user has a product in the cart', async function () {
   await productsPage.addFirstProductToCart();
+  // A Given must guarantee state, not just perform an action: verify the
+  // add actually registered (the first product's button switched to REMOVE)
+  if (!(await productsPage.isFirstProductAdded())) {
+    throw new Error('Product was not added to the cart');
+  }
 });
 
 // ============================================================
@@ -38,6 +43,9 @@ When('the user adds the first product to the cart', async function () {
 
 When('the user opens the cart', async function () {
   await productsPage.openCart();
+  // Completing "open the cart" means the cart screen is actually rendered —
+  // otherwise a subsequent count would run on a half-drawn screen (CI slowness)
+  await cartPage.waitForCartScreen();
 });
 
 When('the user sorts products by {string}', async function (option: string) {
