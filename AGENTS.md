@@ -128,6 +128,11 @@ with `mobile: clearApp` — it forces a slow React Native cold start
   emulators can take 30-60s for the first screen render — screen-visibility
   waits in `wdio.conf.ts` and `ProductsPage` are deliberately generous for
   this reason. Never lower them to "speed up" the suite.
+- **CI runner performance varies wildly between runs** (shared machines):
+  `cucumberOpts.timeout` (180s) must stay above the sum of waits inside any
+  single step or hook, and `specFileRetries: 1` absorbs one-off runner
+  slowness. A timeout killed at exactly 60s means the step ceiling was hit,
+  not a broken test.
 - **Allure reports cannot be opened via `file://`**: `index.html` must be
   served over HTTP — use `npm run allure:open` locally, or the GitHub Pages
   deployment.

@@ -37,8 +37,10 @@ const wdioConfig = {
   // ============================================================
   framework: 'cucumber',
 
-  specFileRetries: 0,
-  specFileRetriesDelay: 0,
+  // CI emulators (shared runners) have wildly variable performance:
+  // retry a failed spec file once before declaring the run red.
+  specFileRetries: 1,
+  specFileRetriesDelay: 15,
   specFileRetriesDeferred: false,
 
   specs: ['./src/features/**/*.feature'],
@@ -59,7 +61,10 @@ const wdioConfig = {
     profile: [],
     strict: true,
     tagExpression: '',
-    timeout: 60000,
+    // Per-step ceiling. Mobile steps on slow CI emulators legitimately take
+    // longer than 60s (app restart + React Native render) — never lower
+    // this below the sum of the explicit waits inside a step/hook.
+    timeout: 180000,
     ignoreUndefinedDefinitions: false,
     retry: 0,
     retryTagFilter: '',
@@ -158,8 +163,9 @@ const wdioConfig = {
     await browser.activateApp('com.swaglabsmobileapp');
     // Wait for the login screen to be ready.
     // Generous timeout: CI emulators render the React Native bundle
-    // much slower than a local machine.
-    await browser.$('~test-Username').waitForDisplayed({ timeout: 60000 });
+    // much slower than a local machine, and runner performance varies
+    // wildly between runs.
+    await browser.$('~test-Username').waitForDisplayed({ timeout: 90000 });
   },
 
   /**
