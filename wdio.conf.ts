@@ -138,12 +138,14 @@ const wdioConfig = {
 
   /**
    * Runs before each scenario.
-   * Restarts the app so every scenario starts from a clean login screen.
+   * Restarts the app so every scenario starts from the login screen.
+   * (The app does not persist its session across restarts, but cart data
+   * survives — features that need a clean cart reset it via the menu.)
    */
   beforeScenario: async function (world: { pickle: { name: string; tags: { name: string }[] } }) {
     const tags = world.pickle.tags.map((t: { name: string }) => t.name);
     console.log(`  ▶ Scenario: ${world.pickle.name} [${tags.join(', ')}]`);
-    // Terminate and relaunch the app to reset its state between scenarios
+    // Terminate and relaunch the app (fast reset: back to the login screen)
     try {
       await browser.terminateApp('com.swaglabsmobileapp');
     } catch {

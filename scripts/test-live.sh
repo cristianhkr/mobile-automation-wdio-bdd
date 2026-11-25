@@ -23,6 +23,6 @@ echo "⏳ Waiting for Android to finish booting..."
 "$ADB" shell 'while [[ -z $(getprop sys.boot_completed) ]]; do sleep 1; done'
 echo "✅ Emulator ready"
 
-# 3. Run the test suite (Appium is started automatically by wdio)
+# 3. Run the full test suite (Appium is started automatically by wdio)
 echo "🎬 Running tests — watch the emulator window..."
-npx wdio run wdio.conf.ts --spec src/features/login.feature
+npx wdio run wdio.conf.ts
