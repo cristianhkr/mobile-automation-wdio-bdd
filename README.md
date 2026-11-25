@@ -157,6 +157,26 @@ The login screen also shows tap-to-autofill buttons (`test-standard_user`, `test
 3. **Create step definitions** in `src/step-definitions/`.
 4. **Run** with `npm run test:android`.
 
+Or just use the built-in OpenCode commands (see below).
+
+## 🤖 OpenCode AI Tooling
+
+This repo ships [OpenCode](https://opencode.ai) skills in
+`.opencode/skills/` plus project-level instructions in `AGENTS.md`.
+Skills are picked up automatically when a task matches their
+description, or can be invoked explicitly:
+
+| Skill | Description |
+|---|---|
+| `@verify` | Full health check: emulator, drivers, typecheck, runs the suite and reports |
+| `@new-test` | Scaffolds a new BDD suite (feature + steps + page object) following repo conventions |
+| `@debug` | Triages failing tests using Allure artifacts and proposes fixes |
+| `@explore-selectors` | Dumps the real app UI to discover selectors for new screens (includes a ready-to-adapt script) |
+
+`AGENTS.md` gives any AI agent working in the repo the project
+conventions, commands, scenario-isolation strategy and the testing
+best practices to follow.
+
 ## 🐛 Troubleshooting
 
 | Problem | Solution |
