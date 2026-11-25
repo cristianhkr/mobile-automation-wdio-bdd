@@ -47,9 +47,13 @@ async function main() {
     }
 
     // Visible texts (useful for XPath text= selectors)
-    const texts = [...new Set((source.match(/text="[^"]+"/g) ?? [])
-      .map((t) => t.replace('text=', '').replace(/"/g, ''))
-      .filter((t) => t.length > 0))];
+    const texts = [
+      ...new Set(
+        (source.match(/text="[^"]+"/g) ?? [])
+          .map((t) => t.replace('text=', '').replace(/"/g, ''))
+          .filter((t) => t.length > 0),
+      ),
+    ];
     for (const t of texts) console.log(`TEXT: "${t}"`);
   } finally {
     await driver.deleteSession();

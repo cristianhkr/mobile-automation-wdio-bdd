@@ -6,14 +6,14 @@ Guidance for any AI agent (or human) working in this repository.
 
 A template repository for **native mobile test automation**:
 
-| Component | Tool |
-|---|---|
-| Framework / Runner | WebdriverIO v10 |
-| Mobile service | Appium v4 (UiAutomator2 driver) |
-| Language | TypeScript (strict) |
-| BDD | Cucumber (`@wdio/cucumber-framework`) |
-| Pattern | Page Object Model |
-| Reports | Allure |
+| Component          | Tool                                  |
+| ------------------ | ------------------------------------- |
+| Framework / Runner | WebdriverIO v10                       |
+| Mobile service     | Appium v4 (UiAutomator2 driver)       |
+| Language           | TypeScript (strict)                   |
+| BDD                | Cucumber (`@wdio/cucumber-framework`) |
+| Pattern            | Page Object Model                     |
+| Reports            | Allure                                |
 
 Demo app under test: **Sauce Labs Mobile Sample** (`com.swaglabsmobileapp`,
 APK in `apps/`). Valid credentials: `standard_user` / `secret_sauce`.
@@ -21,14 +21,17 @@ App accessibility IDs are prefixed with `test-` (e.g. `~test-LOGIN`).
 
 ## Commands
 
-| Command | Purpose |
-|---|---|
-| `npm run test:android` | Run the full suite |
-| `npm run test:android:live` | Boot a visible emulator if needed + run suite |
-| `npm run test:android:smoke` | Run `@smoke` scenarios only |
-| `npm run allure:report` | Generate + open the Allure report |
-| `npm run emulator:headless` | Boot the emulator without a window |
-| `npx tsc --noEmit` | Typecheck (must always pass) |
+| Command                      | Purpose                                       |
+| ---------------------------- | --------------------------------------------- |
+| `npm run test:android`       | Run the full suite                            |
+| `npm run test:android:live`  | Boot a visible emulator if needed + run suite |
+| `npm run test:android:smoke` | Run `@smoke` scenarios only                   |
+| `npm run allure:report`      | Generate + open the Allure report             |
+| `npm run emulator:headless`  | Boot the emulator without a window            |
+| `npm run lint`               | ESLint over the whole project                 |
+| `npm run format`             | Prettier format over the whole project        |
+| `npm run check`              | Full quality gate: lint + format + typecheck  |
+| `npx tsc --noEmit`           | Typecheck (must always pass)                  |
 
 Environment needed for anything that touches the device:
 
@@ -89,7 +92,20 @@ with `mobile: clearApp` — it forces a slow React Native cold start
 - Assert state before acting on it (fail fast with a descriptive error).
 - Screenshots are attached to Allure automatically on step failure.
 - `npx tsc --noEmit` must pass with zero errors before any commit.
+- A Husky pre-commit hook runs ESLint + Prettier (via lint-staged) and the
+  typecheck automatically on every commit — never bypass it with
+  `git commit --no-verify`.
 - The full suite (`npm run test:android`) must be green before pushing.
+
+## Git policy (critical)
+
+- **Never commit or push without asking the user first.** Always show what
+  will be committed and the proposed message, then wait for explicit
+  approval.
+- Never use `git push` on the user's behalf unless the user has just
+  approved it.
+- Keep commits small and focused: one logical change per commit, with a
+  conventional message (`feat:`, `fix:`, `chore:`, `docs:`).
 
 ## Known gotchas (learned the hard way)
 
@@ -109,9 +125,9 @@ with `mobile: clearApp` — it forces a slow React Native cold start
 
 Load with `@skill-id` (or let the model pick them up automatically):
 
-| Skill | Use |
-|---|---|
-| `@verify` | Full health check: env, drivers, typecheck, suite run |
-| `@new-test` | Scaffold a new BDD suite (feature + steps + page object) |
-| `@debug` | Triage failing scenarios with Allure artifacts |
-| `@explore-selectors` | Dump the real UI to find selectors for new screens |
+| Skill                | Use                                                      |
+| -------------------- | -------------------------------------------------------- |
+| `@verify`            | Full health check: env, drivers, typecheck, suite run    |
+| `@new-test`          | Scaffold a new BDD suite (feature + steps + page object) |
+| `@debug`             | Triage failing scenarios with Allure artifacts           |
+| `@explore-selectors` | Dump the real UI to find selectors for new screens       |

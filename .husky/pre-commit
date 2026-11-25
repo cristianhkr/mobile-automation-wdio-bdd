@@ -1,0 +1,5 @@
+# Quality gate on every commit:
+# 1. lint-staged: ESLint --fix + Prettier on staged files
+# 2. Full typecheck (fast, no emulator needed)
+npx lint-staged
+npx tsc --noEmit

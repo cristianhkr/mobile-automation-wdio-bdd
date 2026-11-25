@@ -4,15 +4,15 @@ Proof of Concept for **native Android** mobile test automation using a modern st
 
 ## 🏗️ Tech Stack
 
-| Component | Tool |
-|---|---|
-| **Framework** | WebdriverIO v10 |
-| **Service** | Appium v4 |
-| **Language** | TypeScript (strict mode) |
-| **BDD** | Cucumber (`@wdio/cucumber-framework`) |
-| **Pattern** | Page Object Model (POM) |
-| **Reports** | Allure Report |
-| **Android Automation** | UiAutomator2 |
+| Component              | Tool                                  |
+| ---------------------- | ------------------------------------- |
+| **Framework**          | WebdriverIO v10                       |
+| **Service**            | Appium v4                             |
+| **Language**           | TypeScript (strict mode)              |
+| **BDD**                | Cucumber (`@wdio/cucumber-framework`) |
+| **Pattern**            | Page Object Model (POM)               |
+| **Reports**            | Allure Report                         |
+| **Android Automation** | UiAutomator2                          |
 
 ## 📂 Project Structure
 
@@ -126,27 +126,46 @@ adb devices
 
 ## 🔧 Available Scripts
 
-| Command | Description |
-|---|---|
-| `npm run test:android` | Run all tests |
-| `npm run test:android:live` | Launch visible emulator (if needed) + run tests |
-| `npm run test:android:smoke` | Run `@smoke` tests only |
-| `npm run allure:generate` | Generate HTML report |
-| `npm run allure:open` | Open report in browser |
-| `npm run allure:report` | Generate and open report |
-| `npm run appium:drivers` | List Appium drivers |
-| `npm run emulator` | Launch emulator with visible window (watch tests live) |
-| `npm run emulator:headless` | Launch emulator without window (lighter) |
-| `npm run clean:allure` | Clean results and reports |
+| Command                      | Description                                            |
+| ---------------------------- | ------------------------------------------------------ |
+| `npm run test:android`       | Run all tests                                          |
+| `npm run test:android:live`  | Launch visible emulator (if needed) + run tests        |
+| `npm run test:android:smoke` | Run `@smoke` tests only                                |
+| `npm run allure:generate`    | Generate HTML report                                   |
+| `npm run allure:open`        | Open report in browser                                 |
+| `npm run allure:report`      | Generate and open report                               |
+| `npm run appium:drivers`     | List Appium drivers                                    |
+| `npm run emulator`           | Launch emulator with visible window (watch tests live) |
+| `npm run emulator:headless`  | Launch emulator without window (lighter)               |
+| `npm run clean:allure`       | Clean results and reports                              |
+| `npm run lint`               | ESLint over the whole project                          |
+| `npm run lint:fix`           | ESLint with auto-fix                                   |
+| `npm run format`             | Prettier format over the whole project                 |
+| `npm run check`              | Full quality gate: lint + format check + typecheck     |
+
+## 🧹 Code Quality
+
+The project enforces best practices automatically:
+
+| Tool            | Role                                                      |
+| --------------- | --------------------------------------------------------- |
+| **ESLint**      | Static analysis: unused code, unsafe `any`, bad patterns  |
+| **Prettier**    | Consistent code style across every contribution           |
+| **Husky**       | Git pre-commit hook — blocks commits that fail the checks |
+| **lint-staged** | Runs the checks only on staged files (fast commits)       |
+
+Every commit automatically runs ESLint + Prettier on the staged files and a
+full TypeScript typecheck (`tsc --noEmit`). A commit is only created when
+everything passes — no broken code enters the repository.
 
 ## 🔑 Demo App Credentials
 
 The Sauce Labs sample app (v2.7.1) uses these credentials:
 
-| Username | Password | Result |
-|---|---|---|
+| Username        | Password       | Result                             |
+| --------------- | -------------- | ---------------------------------- |
 | `standard_user` | `secret_sauce` | Successful login → product catalog |
-| anything else | anything else | Error message displayed |
+| anything else   | anything else  | Error message displayed            |
 
 The login screen also shows tap-to-autofill buttons (`test-standard_user`, `test-locked_out_user`, `test-problem_user`).
 
@@ -166,11 +185,11 @@ This repo ships [OpenCode](https://opencode.ai) skills in
 Skills are picked up automatically when a task matches their
 description, or can be invoked explicitly:
 
-| Skill | Description |
-|---|---|
-| `@verify` | Full health check: emulator, drivers, typecheck, runs the suite and reports |
-| `@new-test` | Scaffolds a new BDD suite (feature + steps + page object) following repo conventions |
-| `@debug` | Triages failing tests using Allure artifacts and proposes fixes |
+| Skill                | Description                                                                                    |
+| -------------------- | ---------------------------------------------------------------------------------------------- |
+| `@verify`            | Full health check: emulator, drivers, typecheck, runs the suite and reports                    |
+| `@new-test`          | Scaffolds a new BDD suite (feature + steps + page object) following repo conventions           |
+| `@debug`             | Triages failing tests using Allure artifacts and proposes fixes                                |
 | `@explore-selectors` | Dumps the real app UI to discover selectors for new screens (includes a ready-to-adapt script) |
 
 `AGENTS.md` gives any AI agent working in the repo the project
@@ -179,13 +198,13 @@ best practices to follow.
 
 ## 🐛 Troubleshooting
 
-| Problem | Solution |
-|---|---|
-| `Appium driver not found` | Run `npm run appium:install:uiautomator2` |
-| `No device connected` | Start an emulator or connect a device (`adb devices`) |
-| `Element not found` | Verify the accessibility ID using Appium Inspector |
-| `TypeScript compilation error` | Run `npx tsc --noEmit` to check for type errors |
+| Problem                                                 | Solution                                                                                                                                   |
+| ------------------------------------------------------- | ------------------------------------------------------------------------------------------------------------------------------------------ |
+| `Appium driver not found`                               | Run `npm run appium:install:uiautomator2`                                                                                                  |
+| `No device connected`                                   | Start an emulator or connect a device (`adb devices`)                                                                                      |
+| `Element not found`                                     | Verify the accessibility ID using Appium Inspector                                                                                         |
+| `TypeScript compilation error`                          | Run `npx tsc --noEmit` to check for type errors                                                                                            |
 | `Unable to compile TypeScript` (weird line/col numbers) | Don't add `ts-node/register` to `cucumberOpts.requireModule` — WebdriverIO v10 has built-in TS support via `tsx` and both loaders conflict |
-| `SplashActivity never started` | Add `'appium:appWaitActivity': '<your.MainActivity>'` to capabilities (splash screens transition too fast for Appium) |
-| `ANDROID_HOME not set` | `export ANDROID_HOME=/opt/homebrew/share/android-commandlinetools` (or your SDK path) |
-| `Could not find 'aapt2'` | Install Build Tools: `sdkmanager "build-tools;34.0.0"` |
+| `SplashActivity never started`                          | Add `'appium:appWaitActivity': '<your.MainActivity>'` to capabilities (splash screens transition too fast for Appium)                      |
+| `ANDROID_HOME not set`                                  | `export ANDROID_HOME=/opt/homebrew/share/android-commandlinetools` (or your SDK path)                                                      |
+| `Could not find 'aapt2'`                                | Install Build Tools: `sdkmanager "build-tools;34.0.0"`                                                                                     |

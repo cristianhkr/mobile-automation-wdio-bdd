@@ -15,7 +15,22 @@
     "appium:install:uiautomator2": "appium driver install uiautomator2",
     "clean:allure": "rm -rf allure-results allure-report",
     "emulator": "/opt/homebrew/share/android-commandlinetools/emulator/emulator -avd Pixel_6_API_34 -no-audio",
-    "emulator:headless": "/opt/homebrew/share/android-commandlinetools/emulator/emulator -avd Pixel_6_API_34 -no-window -no-audio"
+    "emulator:headless": "/opt/homebrew/share/android-commandlinetools/emulator/emulator -avd Pixel_6_API_34 -no-window -no-audio",
+    "lint": "eslint .",
+    "lint:fix": "eslint . --fix",
+    "format": "prettier --write .",
+    "format:check": "prettier --check .",
+    "check": "npm run lint && npm run format:check && tsc --noEmit",
+    "prepare": "husky"
+  },
+  "lint-staged": {
+    "*.ts": [
+      "eslint --fix",
+      "prettier --write"
+    ],
+    "*.{json,md,yml,yaml}": [
+      "prettier --write"
+    ]
   },
   "keywords": [
     "webdriverio",
@@ -29,6 +44,7 @@
   "author": "",
   "license": "MIT",
   "devDependencies": {
+    "@eslint/js": "^10.0.1",
     "@types/node": "^22.0.0",
     "@wdio/allure-reporter": "^10.2.0",
     "@wdio/appium-service": "^10.2.0",
@@ -41,7 +57,13 @@
     "allure-commandline": "^2.32.0",
     "appium": "^4.0.0",
     "appium-uiautomator2-driver": "^10.4.0",
-    "typescript": "^5.7.0"
+    "eslint": "^10.15.0",
+    "eslint-config-prettier": "^10.1.8",
+    "husky": "^9.1.7",
+    "lint-staged": "^17.6.2",
+    "prettier": "^3.10.1",
+    "typescript": "^5.7.0",
+    "typescript-eslint": "^8.74.0"
   },
   "dependencies": {
     "expect-webdriverio": "^8.1.0"

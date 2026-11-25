@@ -16,9 +16,12 @@ Given('the user is on the login screen', async function () {
 // When
 // ============================================================
 
-When('they enter username {string} and password {string}', async function (username: string, password: string) {
-  await loginPage.enterCredentials(username, password);
-});
+When(
+  'they enter username {string} and password {string}',
+  async function (username: string, password: string) {
+    await loginPage.enterCredentials(username, password);
+  },
+);
 
 When('they tap the {string} button', async function (_buttonName: string) {
   await loginPage.tapLoginButton();

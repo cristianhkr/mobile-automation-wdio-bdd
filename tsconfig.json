@@ -20,23 +20,10 @@
       "@step-definitions/*": ["src/step-definitions/*"],
       "@features/*": ["src/features/*"]
     },
-    "types": [
-      "node",
-      "@wdio/globals/types",
-      "@wdio/cucumber-framework",
-      "expect-webdriverio"
-    ]
+    "types": ["node", "@wdio/globals/types", "@wdio/cucumber-framework", "expect-webdriverio"]
   },
-  "include": [
-    "src/**/*.ts",
-    "wdio.conf.ts"
-  ],
-  "exclude": [
-    "node_modules",
-    "dist",
-    "allure-results",
-    "allure-report"
-  ],
+  "include": ["src/**/*.ts", "wdio.conf.ts"],
+  "exclude": ["node_modules", "dist", "allure-results", "allure-report"],
   "ts-node": {
     "files": true
   }

@@ -1,5 +1,3 @@
-import type { Capabilities } from '@wdio/types';
-
 // ============================================================
 // Android Capabilities
 // ============================================================
@@ -7,21 +5,21 @@ import type { Capabilities } from '@wdio/types';
 const androidCapabilities = {
   platformName: 'Android',
   'appium:deviceName': 'emulator-5554', // ← Change to your actual deviceName (e.g., Pixel_6_API_34)
-  'appium:platformVersion': '14',       // ← Change to your emulator/device Android version
+  'appium:platformVersion': '14', // ← Change to your emulator/device Android version
   'appium:automationName': 'UiAutomator2',
   'appium:app': './apps/Android.SauceLabs.Mobile.Sample.app.2.7.1.apk', // ← Path to your APK
   // 'appium:app': './apps/SwagLabsMobile.apk',   // ← Alternative: Sauce Labs demo app
 
   // Activity wait configuration (SplashActivity transitions to MainActivity quickly)
   'appium:appWaitActivity': 'com.swaglabsmobileapp.MainActivity',
-  'appium:appWaitDuration': 30000,      // max time (ms) to wait for the app activity
+  'appium:appWaitDuration': 30000, // max time (ms) to wait for the app activity
 
   // Additional recommended options
-  'appium:noReset': false,             // true to keep app data between sessions
-  'appium:fullReset': false,           // true to clear app data after each session
+  'appium:noReset': false, // true to keep app data between sessions
+  'appium:fullReset': false, // true to clear app data after each session
   'appium:autoGrantPermissions': true, // automatically grant requested permissions
-  'appium:newCommandTimeout': 120,     // timeout between commands (seconds)
-  'appium:forceAppLanguage': 'en',     // force app language
+  'appium:newCommandTimeout': 120, // timeout between commands (seconds)
+  'appium:forceAppLanguage': 'en', // force app language
 
   // To connect to a remote physical device (optional)
   // 'appium:udid': 'emulator-5554',
@@ -109,20 +107,26 @@ const wdioConfig = {
   // Reporters
   // ============================================================
   reporters: [
-    ['allure', {
-      outputDir: './allure-results',
-      disableWebdriverStepsReporting: false,
-      disableWebdriverScreenshotsReporting: false,
-      disableMochaHooks: false,
-    }],
-    ['spec', {
-      symbols: {
-        ok: '✓',
-        err: '✗',
-        bold: '‣',
-        indent: '  ',
+    [
+      'allure',
+      {
+        outputDir: './allure-results',
+        disableWebdriverStepsReporting: false,
+        disableWebdriverScreenshotsReporting: false,
+        disableMochaHooks: false,
       },
-    }],
+    ],
+    [
+      'spec',
+      {
+        symbols: {
+          ok: '✓',
+          err: '✗',
+          bold: '‣',
+          indent: '  ',
+        },
+      },
+    ],
   ],
 
   // ============================================================
@@ -162,18 +166,17 @@ const wdioConfig = {
    */
   afterStep: async function (
     step: { text: string },
-    world: { attach: (data: string, mimeType: string, name: string) => void; [key: string]: unknown },
-    result: { error?: Error; duration?: number } | null | undefined
+    world: {
+      attach: (data: string, mimeType: string, name: string) => void;
+      [key: string]: unknown;
+    },
+    result: { error?: Error; duration?: number } | null | undefined,
   ) {
     if (result?.error) {
       try {
         const screenshot = await browser.takeScreenshot();
         // Attach screenshot to Allure report
-        world.attach(
-          screenshot,
-          'image/png',
-          `Screenshot on failure: ${step.text}`
-        );
+        world.attach(screenshot, 'image/png', `Screenshot on failure: ${step.text}`);
       } catch (e) {
         console.error('⚠️  Failed to capture screenshot:', e);
       }
