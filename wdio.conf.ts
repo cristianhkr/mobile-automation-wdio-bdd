@@ -156,8 +156,10 @@ const wdioConfig = {
       // app was not running — ignore
     }
     await browser.activateApp('com.swaglabsmobileapp');
-    // Wait for the login screen to be ready
-    await browser.$('~test-Username').waitForDisplayed({ timeout: 20000 });
+    // Wait for the login screen to be ready.
+    // Generous timeout: CI emulators render the React Native bundle
+    // much slower than a local machine.
+    await browser.$('~test-Username').waitForDisplayed({ timeout: 60000 });
   },
 
   /**

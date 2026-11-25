@@ -40,8 +40,9 @@ export default class ProductsPage extends BasePage {
 
   /**
    * Checks whether the product catalog is visible.
+   * Generous default: the RN app re-renders slowly on CI emulators.
    */
-  async isProductsScreenVisible(timeout: number = 15000): Promise<boolean> {
+  async isProductsScreenVisible(timeout: number = 30000): Promise<boolean> {
     return this.isElementVisible(this.productsHeader, timeout);
   }
 
