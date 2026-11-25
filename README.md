@@ -8,6 +8,18 @@ Every push runs the full suite on a cloud Android emulator (GitHub Actions) and
 publishes the Allure report to GitHub Pages — click the badge above to see the
 latest live report with screenshots and step-by-step results.
 
+## 📊 Live Test Report
+
+### ➡️ [Open the Allure Report](https://cristianhkr.github.io/mobile-automation-wdio-bdd/)
+
+Hosted on GitHub Pages and regenerated on **every push**. No cloning, no setup —
+just click and explore:
+
+- ✅ **8 BDD scenarios** with step-by-step results and timings
+- 📸 **Screenshots** attached automatically to failing steps
+- 📈 **Trends and history** accumulated across runs
+- 🌳 **Suites by feature** (login / shopping) with tags like `@smoke`
+
 ## 🏗️ Tech Stack
 
 | Component              | Tool                                  |
