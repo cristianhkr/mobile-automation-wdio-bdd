@@ -1,0 +1,33 @@
+# Dependencies
+node_modules/
+
+# Build output
+dist/
+
+# Allure
+allure-results/
+allure-report/
+allure-report.zip
+
+# Logs
+logs/
+
+# IDE
+.idea/
+.vscode/
+*.swp
+*.swo
+
+# OS
+.DS_Store
+Thumbs.db
+
+# Appium
+appium-*.log
+
+# Env
+.env
+.env.*
+
+# APKs (opcional: descomentar si no quieres trackear binarios)
+# apps/*.apk
