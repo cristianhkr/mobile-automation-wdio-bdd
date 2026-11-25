@@ -1,0 +1,7 @@
+"DESCRIPTION","DURATION IN MS","NAME","PARENT SUITE","START TIME","STATUS","STOP TIME","SUB SUITE","SUITE","TEST CLASS","TEST METHOD"
+"","11711","@smoke, @login, @invalid, @regression: Failed login with invalid credentials","@smoke, @login: MyDemoApp Login","2026-11-25","passed","2026-11-25","","","",""
+"","18860","@shopping, @catalog: Sort products by price ascending","@shopping: Shopping cart and product catalog","2026-11-25","passed","2026-11-25","","","",""
+"","18299","@shopping, @cart, @smoke: Add a product to the cart","@shopping: Shopping cart and product catalog","2026-11-25","passed","2026-11-25","","","",""
+"","20374","@shopping, @menu: Logout via the side menu","@shopping: Shopping cart and product catalog","2026-11-25","passed","2026-11-25","","","",""
+"","13069","@smoke, @login, @successful, @regression: Successful login with valid credentials","@smoke, @login: MyDemoApp Login","2026-11-25","passed","2026-11-25","","","",""
+"","20390","@shopping, @cart: Inspect the cart contents","@shopping: Shopping cart and product catalog","2026-11-25","passed","2026-11-25","","","",""

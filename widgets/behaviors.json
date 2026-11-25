@@ -1,0 +1,1 @@
+{"total":2,"items":[{"uid":"346e8863eddf0644e597b9ef85cb7caf","name":"@shopping: Shopping cart and product catalog","statistic":{"failed":0,"broken":0,"skipped":0,"passed":4,"unknown":0,"total":4}},{"uid":"b452933e0d5e5a6035a8fbea75c2af85","name":"@smoke, @login: MyDemoApp Login","statistic":{"failed":0,"broken":0,"skipped":0,"passed":2,"unknown":0,"total":2}}]}
