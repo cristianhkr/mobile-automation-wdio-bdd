@@ -1,9 +1,10 @@
-# 📱 Mobile Automation PoC — WebdriverIO + Appium + Cucumber + POM + Allure
+# 📱 Mobile Automation Template — WebdriverIO + Appium + Cucumber + POM + Allure
 
 [![Mobile Test Suite](https://github.com/cristianhkr/mobile-automation-wdio-bdd/actions/workflows/mobile-tests.yml/badge.svg)](https://github.com/cristianhkr/mobile-automation-wdio-bdd/actions/workflows/mobile-tests.yml)
 [![Allure Report](https://img.shields.io/badge/Allure-Latest_Report-ff4b8b?logo=allure&logoColor=white)](https://cristianhkr.github.io/mobile-automation-wdio-bdd/)
 
-Proof of Concept for **native Android** mobile test automation using a modern stack.
+A production-ready **template** for **native Android** mobile test automation.
+Click **"Use this template"** (green button above) to generate your own repo from it.
 Every push runs the full suite on a cloud Android emulator (GitHub Actions) and
 publishes the Allure report to GitHub Pages — click the badge above to see the
 latest live report with screenshots and step-by-step results.
@@ -53,6 +54,9 @@ just click and explore:
 ```
 
 ## 🚀 Getting Started
+
+Generate a new repo from this one with the **"Use this template"** button,
+clone it, and you are three steps away from running tests.
 
 ### 1. Install dependencies
 

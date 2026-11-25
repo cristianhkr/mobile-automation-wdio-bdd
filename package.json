@@ -1,7 +1,7 @@
 {
   "name": "mobile-automation-wdio-bdd",
   "version": "1.0.0",
-  "description": "PoC for native mobile automation with WebdriverIO + Appium + Cucumber + POM + Allure",
+  "description": "Template for native mobile automation with WebdriverIO + Appium + Cucumber + POM + Allure",
   "main": "index.js",
   "scripts": {
     "test:android": "wdio run wdio.conf.ts",
